@@ -1,0 +1,39 @@
+body{
+    background-color:cornsilk;
+}
+.BackG
+{
+    background-color: #007bff;
+    height: 400px;
+}
+.container
+{
+    color: white;
+    text-align:center;
+    margin-top: 100px;
+    font-size: larger;
+    font-weight: bold;
+}
+.khung
+{
+    width: 250px;
+    height: 50px;
+    padding-top: 5px;
+    background-color: white;
+    color:#007bff;
+    border-radius: 10px;
+    margin-left: 40%;
+
+}
+.khung h3{
+    width: 100%;
+}
+.BackG nav
+{
+    font-size:larger;
+    font-weight: 900;
+}
+footer
+{
+    font-size: 2em;
+}

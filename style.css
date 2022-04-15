@@ -1,0 +1,33 @@
+.BackG
+{
+    background-color: #007bff;
+    height: 500px;
+}
+.container-fluid
+{
+    color: white;
+    text-align:center;
+    margin-top: 100px;
+}
+.khung
+{
+    width: 250px;
+    height: 50px;
+    padding-top: 5px;
+    background-color: white;
+    color:#007bff;
+    border-radius: 10px;
+    margin-left: 40%;
+}
+.khung h3{
+    width: 100%;
+}
+.khung_noiDung
+{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 20px;
+    background-color: white;
+    color:#007bff;
+    border-radius: 10px;
+}

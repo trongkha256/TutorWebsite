@@ -1,0 +1,28 @@
+body{
+    background-color:rgb(211, 211, 209);
+}
+.BackG
+{
+    background-color: #007bff;
+    height: 400px;
+}
+.container-fluid
+{
+    background-color:white;
+    height: 600px;
+    padding-top: 50px;
+    border-radius: 35px;
+    margin-top: 50px;
+    text-align: center;
+    width: 90%;
+}
+.BackG nav
+{
+    font-size: large;
+    font-weight: 900;
+}
+#list-header
+{
+    color:white;
+     background-color:#007bff;
+}

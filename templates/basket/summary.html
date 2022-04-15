@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}Basket Summary{% endblock %}
+{% block content %}
+
+<main class="pt-5">
+  <div class="container">
+    <h1 class="h5">Shopping basket</h1>
+    {% for item in basket %}
+    {% with course=item.course %}
+    <div data-index="{{course.id}}" class="row mb-4 border course-item">
+      <div class="col-md-3 col-lg-2 order-md-first bg-light">
+        <img class="img-fluid mx-auto d-block" width="120px" alt="Responsive image" src="{{ course.image.url }}">
+      </div>
+      <div class="col-md-9 col-lg-10 ps-md-3 ps-lg-10">
+        <a href="{{ course.get_absolute_url }}" class="text-decoration-none text-reset">
+          <h1 class="h5 pt-2">{{ course.title }}</h1>
+        </a>
+        <div class="border">
+          <div class="col border-bottom">
+            <div class="row p-3">
+              <div class="col-6">Online course</div>
+              <div class="col-6 text-end"><span class="h6 fw-bold">{{ course.price|intcomma }} VND</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row p-3">
+              <div class="col-12">
+                <button type="button" id="delete-button" data-index="{{course.id}}"
+                  class="btn btn-outline-secondary btn-sm delete-button">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endwith %}
+    {% endfor %}
+    <div class="col-12 text-end">
+      <div class="h6 fw-bold">Total: <div id="total" class="d-inline-flex">{{ basket.get_total_price|intcomma }} VND</div></div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Delete Item
+  $(document).on('click', '.delete-button', function (e) {
+    e.preventDefault();
+    var prodid = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_delete" %}',
+      data: {
+        courseid: $(this).data('index'),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+        $('.course-item[data-index="' + prodid + '"]').remove();
+        document.getElementById("subtotal").innerHTML = json.subtotal;
+        document.getElementById("basket-qty").innerHTML = json.qty
+      },
+      error: function (xhr, errmsg, err) {}
+    });
+  })
+
+  // Update Item
+  $(document).on('click', '.update-button', function (e) {
+    e.preventDefault();
+    var prodid = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_update" %}',
+      data: {
+        courseid: $(this).data('index'),
+        courseqty: $('#select' + prodid + ' option:selected').text(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+        document.getElementById("basket-qty").innerHTML = json.qty
+        document.getElementById("subtotal").innerHTML = json.subtotal
+      },
+      error: function (xhr, errmsg, err) {}
+    });
+  })
+</script>
+
+{% endblock %}
